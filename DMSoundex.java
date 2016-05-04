@@ -351,7 +351,12 @@ public class DMSoundex
           {
             if(dmval[k]==-1)
               break;
-            if(temp.length()==0 || temp.charAt(temp.length()-1)!=(char)(48+(dmval[k]%10)) || !repl)
+            char comp;
+            if(dmval[k]>9)
+              comp=(char)((dmval[k]/10)+48);
+            else
+              comp=(char)(dmval[k]+48);
+            if(temp.length()==0 || temp.charAt(temp.length()-1)!=comp || !repl)
             {
               if(k==0)
               {
@@ -364,15 +369,18 @@ public class DMSoundex
             }
           }
         }
+        
         if(!repl)
           repl=true;
-        if(i+1<name.length())
-          beside=name.charAt(i+1);
-        else
-          beside='/';
         i=j-1;
         break;
       }
+      if(i+2<name.length())
+      {
+        beside=name.charAt(i+2);
+      }
+      else
+        beside='/';
     }
     for(int i=0;i<arr.size();i++)
     {
